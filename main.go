@@ -48,15 +48,15 @@ func main() {
 		// key is url
 		wg.Add(2)
 
-		go func() {
+		go func(url string, passwd string, scan string, pattern string, batch int) {
 			defer wg.Done()
 			dedup(url, passwd, scan, "01:*", batch)
-		}()
+		}(url, passwd, scan, "01:*", batch)
 
-		go func() {
+		go func(url string, passwd string, scan string, pattern string, batch int) {
 			defer wg.Done()
 			dedup(url, passwd, scan, "04:*", batch)
-		}()
+		}(url, passwd, scan, "04:*", batch)
 	}
 
 	wg.Wait()
